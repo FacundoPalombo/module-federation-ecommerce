@@ -1,16 +1,25 @@
 import { faker } from "@faker-js/faker";
 
-let products = "";
+const mount = (el) => {
+  let products = "";
 
-for (let i = 0; i < 3; i++) {
-  const productName = faker.commerce.productName();
-  products += `<p>${productName}</p>`;
+  for (let i = 0; i < 3; i++) {
+    const productName = faker.commerce.productName();
+    products += `<p>${productName}</p>`;
+  }
+
+  console.log(products);
+
+  el.innerHTML += products;
+  el.style.background = "red";
+  el.style.width = "500px";
+  el.style.height = "200px";
+};
+
+if (process.env.NODE_ENV === "development") {
+  const el = document.getElementById("dev-products");
+  if (el) {
+    mount(el);
+  }
 }
-
-console.log(products);
-const body = document.getElementById("root");
-
-body.innerHTML += products;
-body.style.background = "red";
-body.style.width = "500px";
-body.style.height = "200px";
+export { mount };
